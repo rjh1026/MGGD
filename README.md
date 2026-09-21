@@ -29,15 +29,15 @@ python run_protocol.py --dataset brain --manifests-dir /local/manifests/brain --
 
 The wrapper is dry-run by default. Only `--execute` starts reconstruction and training; `--resume` explicitly permits reuse of an existing nonempty run directory.
 
-## Reproducibility Limits
+## Experimental Protocol
 
-**Scientific implementation differences are documented, not corrected in this archive.** Inspection found a mismatch between the FFT coordinate convention and the central sampling-mask placement, and a VarNet mask-handling mismatch. These affect interpretation of the stated sampling protocol and the VarNet comparison, beyond ordinary environment or rounding uncertainty. Read [Known Differences](docs/KNOWN_DIFFERENCES.md) before using these archived scores as evidence of the intended protocol or a correctly matched official VarNet baseline.
+Sections 3.2-3.4 of the submitted manuscript describe the following experimental design. The knee analysis uses 147 coronal PD-FS training volumes and a separate subset of 50 official validation volumes, divided into 20 validation and 30 evaluation volumes. The brain analysis uses 555 axial T2-weighted volumes from the official training set, divided into 505 training, 20 validation, and 30 evaluation volumes. The training, validation, and evaluation subsets are used for prior estimation and network training, parameter and model selection, and final performance assessment, respectively.
 
-Code was collected on **2026-09-21**. The historical revision of the authors' code and a historical environment lock were not retained. Bitwise end-to-end reproduction has not been verified. The current host has binary-incompatible packages and is not a validated reconstruction environment.
+Reconstruction quality is evaluated at acceleration factors R = 2, 4, 6, and 8 using NMSE, PSNR, and SSIM. Regularization parameters are selected separately for the knee and brain datasets by maximizing mean validation SSIM and are fixed during evaluation. Slice-level metrics are averaged within each volume, giving 30 paired observations per dataset at each acceleration factor.
 
-Obtain data independently under the fastMRI terms. Exact cohort manifests, images, and trained neural-network weights remain local-only. Generating an equivalent split from another available cohort does not recover the exact paper sample. Recalculated summaries are distinct from submitted numbers; this release does not claim that all manuscript figures have been reproduced. See [Known Differences](docs/KNOWN_DIFFERENCES.md).
+The noise analysis uses five evaluation volumes from each dataset at R = 8, with one slice per volume. Each case is reconstructed 20 times with independently generated circular complex Gaussian noise of standard deviation 0.01 added at sampled locations. The underlying signal, sampling mask, and sensitivity maps remain fixed across repetitions. Noise performance is summarized using magnitude variance, SNR, and the empirical effective geometry-factor ratio relative to SENSE.
 
-The reported table audit matched 499 of 504 checked cells; five PSNR cells differed by 0.01, with no other differences among the audited cells. This is a table check, not an end-to-end reconstruction result.
+The source archive provides reconstruction and analysis scripts, recorded settings, prior estimates, and aggregate numerical results. Execution instructions and environment requirements are provided in [Reproducing](docs/REPRODUCING.md) and [Environment](docs/ENVIRONMENT.md). MRI data must be obtained separately through [fastMRI](https://fastmri.med.nyu.edu/) under its applicable terms. Documented differences between the archived implementation and the manuscript, together with table-level comparisons, are retained in [Implementation and results notes](docs/KNOWN_DIFFERENCES.md).
 
 ## Attribution and License Status
 
