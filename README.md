@@ -13,6 +13,14 @@ The release contains reconstruction scripts, recorded settings and prior estimat
 
 ## Use
 
+The **complete source and aggregate-results tree** is distributed as [MGGD_source_results.zip](MGGD_source_results.zip). The top-level scripts and `docs/` are also displayed for convenient inspection. Download the archive and extract it before running commands; it includes all scientific scripts, vendored model code and its license, configurations, and CSV results. The archive contains no MRI images, case-level data, or trained network checkpoints.
+
+```sh
+python -m zipfile -e MGGD_source_results.zip .
+cd MGGD_source_results
+python verify_release.py
+```
+
 See [Reproducing](docs/REPRODUCING.md) for table recalculation, local manifests, and reconstruction commands, and [Environment](docs/ENVIRONMENT.md) before installing dependencies. A command preview requires only Python:
 
 ```sh
@@ -33,4 +41,4 @@ The reported table audit matched 499 of 504 checked cells; five PSNR cells diffe
 
 ## Attribution and License Status
 
-The vendored fastMRI source is recorded at clean commit `91f2df4711adbb6d643df1810f234e4abcf5881b`; its [license](external/fastMRI_official/LICENSE.md) is retained. A license for the authors' source code is pending author choice. This documentation grants no new license and does not extend the third-party license to the authors' code.
+The vendored fastMRI source is recorded at clean commit `91f2df4711adbb6d643df1810f234e4abcf5881b`; its license is retained at `external/fastMRI_official/LICENSE.md` inside the source archive. A license for the authors' source code is pending author choice. This documentation grants no new license and does not extend the third-party license to the authors' code.
