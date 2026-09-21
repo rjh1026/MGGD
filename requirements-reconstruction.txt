@@ -1,0 +1,18 @@
+# Dependency inventory, not an exact or tested reconstruction lock.
+# Resolve mutually compatible builds in a clean candidate environment.
+# See docs/ENVIRONMENT.md before installation or execution.
+numpy
+scipy
+pandas
+h5py
+PyWavelets
+scikit-image
+matplotlib
+# Legacy author FFT calls and modern vendored FFT calls require joint checking.
+# Do not interpret this unpinned entry as a PyTorch 2.x recommendation.
+torch
+# Required by the vendored fastMRI model/data import path.
+requests
+PyYAML
+tqdm
+# fastMRI source is vendored under external/fastMRI_official; do not replace it.

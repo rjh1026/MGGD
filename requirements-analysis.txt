@@ -1,0 +1,4 @@
+# Tested analysis pair for reproduce_tables.py only.
+# Not a historical lock or a validated reconstruction environment.
+numpy==2.0.2
+scipy==1.13.1
